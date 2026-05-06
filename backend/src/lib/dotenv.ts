@@ -1,0 +1,1 @@
+// dotenv is loaded via "dotenv/config" import in mongodb.ts

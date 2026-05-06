@@ -1,0 +1,112 @@
+================= HOSTEL IOT SIMULATOR (WORKING LOGIC) =================
+
+This simulator mimics real-time IoT behavior for:
+- Water Tank
+- Water Chiller
+- Lights System
+- Room Power Monitoring
+
+--------------------------------------------------
+1. WATER TANK SIMULATION
+--------------------------------------------------
+- Reads latest tank status from DB
+- Adjusts water level:
+  • Motor ON → level increases
+  • Motor OFF → level decreases
+
+- AUTO MODE LOGIC:
+  • <= 15% → Motor ON (Critical)
+  • >= 98% → Motor OFF (Full)
+  • <= 25% → Warning
+
+- Calculates:
+  • Current liters
+  • Liters used
+
+- Stores:
+  • Updated tank status
+  • Usage record
+
+--------------------------------------------------
+2. WATER CHILLER SIMULATION
+--------------------------------------------------
+- Reads latest chiller data
+- Adjusts:
+  • Water level (based on filter)
+  • Temperature (based on target)
+
+- COOLER LOGIC:
+  • Temp > target → Cooling ON
+  • Temp <= target → Cooling OFF
+
+- AUTO FILTER MODE:
+  • <= 20% → Filter ON
+  • >= 98% → Filter OFF
+
+- Stores:
+  • Updated chiller status
+  • Usage record
+
+--------------------------------------------------
+3. LIGHT SYSTEM SIMULATION
+--------------------------------------------------
+- Iterates over all light groups
+
+MODES:
+  • always-on → Always ON
+  • manual → No automation
+  • schedule → Time-based control
+
+- Checks current time vs schedules
+- Turns lights ON/OFF automatically
+- Logs every automated change
+
+--------------------------------------------------
+4. POWER CONSUMPTION SIMULATION
+--------------------------------------------------
+For each room:
+
+A) VACANT:
+  • Minimal power usage (5–30W)
+
+B) HOLIDAY:
+  • Low/medium usage (20–80W)
+  • >50W triggers anomaly warning
+
+C) OCCUPIED:
+  • Peak hours (after 6PM): 400–900W
+  • Normal hours: 150–400W
+  • >1500W = anomaly
+
+- Updates:
+  • Current watts
+  • Daily kWh
+  • Monthly kWh
+
+- Logs anomalies (with cooldown)
+
+--------------------------------------------------
+5. SYSTEM STARTER
+--------------------------------------------------
+Function: startSimulator()
+
+Runs all simulations at intervals:
+  • Water Tank → 10 sec
+  • Water Chiller → 12 sec
+  • Lights → 60 sec
+  • Power → 15 sec
+
+Also runs all simulations immediately on start.
+
+--------------------------------------------------
+NOTES
+--------------------------------------------------
+- Uses random() to simulate realistic fluctuation
+- Logs stored in SystemLog collection
+- Designed for MongoDB models
+- Fully async & non-blocking
+- Mimics real IoT sensor + automation behavior
+
+==================================================
+END OF FILE
+==================================================
