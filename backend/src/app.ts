@@ -18,8 +18,8 @@ import express from "express";
   }
 
   const app = express();
-
-  app.use(cors({ origin: ["http://localhost:3000", "https://smarthosteliot.vercel.app"] , credentials: true }));
+  app.set('trust proxy', 1)
+  app.use(cors({ origin: ["http://localhost:5173", "https://smarthosteliot.vercel.app"] , credentials: true }));
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
   app.use(session({
@@ -28,6 +28,7 @@ import express from "express";
     saveUninitialized: false,
     cookie: { httpOnly: true, secure: false, maxAge: 24 * 60 * 60 * 1000 },
   }));
+
 
   app.get("/api/healthz", (_req, res) => res.json({ status: "ok" }));
   app.use("/api", authRouter);
