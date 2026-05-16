@@ -25,7 +25,7 @@ import { Router } from "express";
         lights: { totalGroups: lights.length, activeGroups, lastUpdated: new Date() },
         power: { totalConsumptionKwh: Math.round(totalCurrentWatts / 1000 * 100) / 100, activeRooms: rooms.filter((r) => r.occupancyStatus === "occupied").length, anomalyCount, lastUpdated: new Date() },
         recentAlerts: recentLogs.filter((l) => l.level === "warning" || l.level === "error" || l.level === "critical").map((l) => ({ id: l._id.toString(), timestamp: l.timestamp, module: l.module, level: l.level, message: l.message, details: l.details })),
-      });
+      });      
     } catch (err) { return res.status(500).json({ error: "Internal server error" }); }
   });
 

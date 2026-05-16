@@ -19,4 +19,3 @@ import { mongoose } from "../lib/mongodb";
   };
 
   export const Admin = mongoose.model("Admin", adminSchema);
-  

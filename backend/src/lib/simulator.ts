@@ -8,6 +8,7 @@ import { WaterTankStatus, WaterUsageRecord } from "../models/WaterTank";
 // no use for these two variables they are just to avoid heavy data insertion in database
 let waterTankCounter = 0;
 let waterClillerCounter = 0;
+
   async function simulateWaterTank() {
     try {
       waterTankCounter++;
@@ -120,10 +121,14 @@ let waterClillerCounter = 0;
 
   export function startSimulator() {
     console.log("[sim] IoT simulator started");
-    setInterval(simulateWaterTank, 30000);
-    setInterval(simulateWaterChiller, 30000);
+    // setInterval(simulateWaterTank, 30000);
+    // setInterval(simulateWaterChiller, 30000);
+    // setInterval(simulateLights, 60000);
+    // setInterval(simulatePower, 3600000);
+    setInterval(simulateWaterTank, 10000);
+    setInterval(simulateWaterChiller, 10000);
     setInterval(simulateLights, 60000);
-    setInterval(simulatePower, 3600000);
+    setInterval(simulatePower, 10000);
     simulateWaterTank();
     simulateWaterChiller();
     simulateLights();
